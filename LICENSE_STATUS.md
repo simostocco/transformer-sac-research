@@ -1,5 +1,7 @@
-# Project license and authority
+# Published source license and authority
 
-The owner explicitly approved MIT for the clean candidate on 2026-11-18 and attested ownership/direction of the selected project code. LICENSE contains that grant. This approval does not authorize pushing or publishing; final publication remains a separate owner decision.
+The owner approved MIT for the selected project source and authorized public release on 2026-11-18. This repository is public; [LICENSE](LICENSE) contains the project-source grant. Ownership and implementation direction are owner-attested, with contribution and AI-assistance boundaries described in [docs/contributions.md](docs/contributions.md).
 
-The NumPy-derived coefficient/reduction design retains its BSD-3-Clause notice in licenses/NUMPY-BSD-3-Clause.txt. Project MIT text does not override that notice, linked dependency licenses, vendor/data agreements or rights in the private archive. No market data, trained assets, vendor SDK material or archive history is part of the grant or release tree.
+The NumPy-derived coefficient/reduction design retains its BSD-3-Clause notice in [licenses/NUMPY-BSD-3-Clause.txt](licenses/NUMPY-BSD-3-Clause.txt). MIT does not override that notice, external dependency terms, vendor/data agreements or rights in the private archive.
+
+The published scope contains no market data, trained/fitted assets, vendor SDK material or private Git history. A source-code license grants no permission to add or redistribute those excluded materials.
