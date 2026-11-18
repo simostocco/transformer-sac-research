@@ -1,12 +1,12 @@
 # Transformer–SAC: learning, numerics and streaming inference
 
-A research codebase for connecting causal time-series features, quantile forecasts and inventory-aware sequential decisions. It combines custom PyTorch models, explicit simulation/accounting and C++ streaming components to study correctness across numerical and asynchronous interfaces.
+This project originated in intraday financial-market research: learning from trade streams to forecast short-horizon price excursions and study inventory-aware decisions with reinforcement learning. Developing the pipeline turned the application into a scientific computing problem involving causal forecasting, numerical consistency and real-time inference.
 
-The computational questions span three layers: **what information reaches the model, how model outputs become state-dependent actions, and how a bounded runtime serves those computations without confusing stale or mismatched results.**
+The research question is how to preserve the meaning of observations, model outputs and state across a forecast-to-policy pipeline, while inference work competes for finite time and memory.
 
 ## Research motivation
 
-A forecast and a policy can be individually well defined yet disagree at their interface: feature timing, floating-point reduction order, embedding layout and inventory state all affect the resulting computation. Streaming adds uneven input activity, incomplete histories and finite inference budgets.
+A forecast must use only observations available at its input time. A policy's requested action must be interpreted against current inventory and pending orders, while a delayed result may no longer describe the current state. Floating-point precision, reduction order and data layout can introduce further differences between implementations.
 
 This project makes those contracts explicit:
 
