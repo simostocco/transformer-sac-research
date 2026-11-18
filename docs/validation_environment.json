@@ -1,0 +1,24 @@
+{
+  "tested_profile": {
+    "platform": "Linux x86_64",
+    "python": "3.11.18",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "pytest": "9.2.0",
+    "pyarrow": "26.0.1",
+    "system_site_packages": false,
+    "installed_wheel": true,
+    "cuda_initialized": false
+  },
+  "native": {
+    "gcc": "11.4.0",
+    "cmake": "3.22.1",
+    "openssl_external": "3.5.9 isolated binary prefix",
+    "oneMKL_external": "2022.1",
+    "complete_dependency_security_certification": false,
+    "openssl_usage": "SHA256 only; remaining PEM advisory not on candidate call path; not full library certification"
+  },
+  "hash_lock": "requirements/linux-cpu-py311.lock",
+  "historical_deployment_environment": "not part of this source-only reproduction"
+}

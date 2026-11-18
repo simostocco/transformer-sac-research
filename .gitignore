@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+build/
+dist/
+.env
+.env.*
+*.pt
+*.pth
+*.pkl
+*.dbn
+*.nx2
+*.parquet
+*.so
+*.dll

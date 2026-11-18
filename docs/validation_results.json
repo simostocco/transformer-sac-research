@@ -1,0 +1,20 @@
+{
+  "scope": "SYNTHETIC_CPU_COMPONENT_CONTROLS_ONLY",
+  "checked_date": "2026-11-18",
+  "python_tests_passed": 72,
+  "subtests_passed": 45,
+  "native_suites_passed": 4,
+  "regression_cases_failed_before_fix": 6,
+  "deprecated_torch_api_warnings": 3,
+  "synthetic_native_log_values": 4096,
+  "native_log_absolute_tolerance": 2e-06,
+  "example": {
+    "synthetic_bars": 240,
+    "output_fields": 37,
+    "finite": true,
+    "trained_weights": false
+  },
+  "historical_or_market_benchmark": false,
+  "cuda_run": false,
+  "limitations": "one qualified CPU dependency profile; native external libraries; no learned-model/live/data reproduction"
+}

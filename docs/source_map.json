@@ -1,0 +1,698 @@
+{
+  "serving_revision": "abcd287ebf440c5396d77e59acadec999f4a9cc9",
+  "source_files": [
+    {
+      "source": "transformer_model.py",
+      "target": "src/streaming_research/forecasting/transformer.py",
+      "operation": "AST dependency closure; import paths only",
+      "source_sha256": "22f193e0b87945c2f209f4c830aab619cde038614010fac2dbb6b82feea1f48f",
+      "segments": [
+        {
+          "name": "standardize_np",
+          "start_line": 51,
+          "end_line": 52,
+          "sha256": "ef927114bb839dc70693162faee40589f875a4e9d5dc572683ed333b648c4bf7"
+        },
+        {
+          "name": "compute_future_targets_mfe_mae_premium",
+          "start_line": 69,
+          "end_line": 136,
+          "sha256": "16a288e149b76bdf2ed73d2346414e0991a19414bcdf710a8414d8b411683bf5"
+        },
+        {
+          "name": "weighted_quantile_pinball_loss",
+          "start_line": 143,
+          "end_line": 168,
+          "sha256": "a303c5ed7d54dda912f342a259e52f402356f9878cabda2444be087f3c20d91c"
+        },
+        {
+          "name": "monotonicity_penalty",
+          "start_line": 170,
+          "end_line": 204,
+          "sha256": "a8ab350549e7a1a7d8f3699503eb22f2f07a5c61554340aef304685f89ba37fc"
+        },
+        {
+          "name": "RelativePositionBias",
+          "start_line": 220,
+          "end_line": 255,
+          "sha256": "b64e2075b956ad20b2a0839bdc238a94212752bf79052b6165faeb3beaa37022"
+        },
+        {
+          "name": "ReturnDeltaMLPBiasLocal",
+          "start_line": 257,
+          "end_line": 300,
+          "sha256": "02f09a1c2d8f9c0357fabb7e9be46d1b6dad5b66ebf5d02c721618609aab2a7b"
+        },
+        {
+          "name": "RoPEMultiheadAttention",
+          "start_line": 306,
+          "end_line": 422,
+          "sha256": "83c0f209d21b7f8cfaec4fb44b2eae3ae789dbc64b71fd5a6b0209023d9e0d35"
+        },
+        {
+          "name": "RoPEBlock",
+          "start_line": 425,
+          "end_line": 448,
+          "sha256": "b32fd5bd1e906b7b95ccc64e9c24f23c2b1516989ab75a1bff715a4a099fabd7"
+        },
+        {
+          "name": "HFTQuantileCPCTransformer",
+          "start_line": 454,
+          "end_line": 597,
+          "sha256": "cbcff686875da3973cce91993964d45344a1f4c7ca95958d6813257eb86ebbc0"
+        }
+      ]
+    },
+    {
+      "source": "infer_dual_transformer_outputs.py",
+      "target": "src/streaming_research/forecasting/inference.py",
+      "operation": "AST dependency closure; import paths only",
+      "source_sha256": "ef34a173e2d9d40de3221023620a44054e4584ee513a7aae85a9bc59e87ac9af",
+      "segments": [
+        {
+          "name": "pool_embedding",
+          "start_line": 65,
+          "end_line": 76,
+          "sha256": "5da73acff2f60750d7352cbf4df86050e97b7ef41ee6113ba0a656f5461dd6af"
+        },
+        {
+          "name": "fmt_qcol",
+          "start_line": 120,
+          "end_line": 123,
+          "sha256": "d8b8ea609261b64001fda591180fc787c917397a959e15ef1d7156ab32c9fce4"
+        }
+      ]
+    },
+    {
+      "source": "trades_features.py",
+      "target": "src/streaming_research/features/trades.py",
+      "operation": "AST dependency closure; import paths only",
+      "source_sha256": "21b8204d273338747ae531ac528cdc90c2c230aa45f4a1d36cfb5b84d2706a20",
+      "segments": [
+        {
+          "name": "NS_PER_S",
+          "start_line": 44,
+          "end_line": 44,
+          "sha256": "d09705a580d1f0fba75a20ef7417ebf7a028239fe68d9caaa56d60e7f8dcd9c3"
+        },
+        {
+          "name": "BasicSecondAggConfig",
+          "start_line": 69,
+          "end_line": 73,
+          "sha256": "5941d87b8fd5bd873fd03ce4b61da03b777f82caa89a3714125fb13f5320f6b1"
+        },
+        {
+          "name": "FeatureCfg",
+          "start_line": 76,
+          "end_line": 82,
+          "sha256": "d71340fd820c19478d9d45f0492063f0feaebef9acb78c32561bfc3f3140e630"
+        },
+        {
+          "name": "NY_TZ",
+          "start_line": 90,
+          "end_line": 90,
+          "sha256": "c454c309359df0f4fac3857bab20a69c7d99ee2559ac769681f3fd11c49ef2be"
+        },
+        {
+          "name": "add_tod_sincos_ny",
+          "start_line": 93,
+          "end_line": 106,
+          "sha256": "12548e6971672c0cfa82fbff0f80c423c7ae14dd0eeaacac866003d401655bfa"
+        },
+        {
+          "name": "kmeans_feature_cols",
+          "start_line": 180,
+          "end_line": 192,
+          "sha256": "86ad04b3d936e4f1bcf71e5f181d60d0224264197bb8bb2df9719557ac4bbb15"
+        },
+        {
+          "name": "kmeans_return_feature_cols",
+          "start_line": 194,
+          "end_line": 202,
+          "sha256": "a7c1d3374fa0efd793e466581fcfbe5d8a45982d7b88cb122b0de5184027176d"
+        },
+        {
+          "name": "load_scaler_json",
+          "start_line": 250,
+          "end_line": 257,
+          "sha256": "813e1ba666714130b00addaa8612ec1ed27a69a74b5a558c845da66dab4bb326"
+        },
+        {
+          "name": "standardize",
+          "start_line": 260,
+          "end_line": 261,
+          "sha256": "2eaf1e39ad33eb660bdd76b58a391aeeab8213de82a64a59bcf5be0a1c7ffb6c"
+        },
+        {
+          "name": "_second_floor_ns",
+          "start_line": 501,
+          "end_line": 502,
+          "sha256": "3d452946ccb2e65182a7396d2c3b3c6153c6ecd3e6a8f05022326473f76320ef"
+        },
+        {
+          "name": "_session_grid_ns",
+          "start_line": 504,
+          "end_line": 508,
+          "sha256": "9c2c39d1a4be2e43647207088cd530c5316f22f62f28f26bbeded4a9d303d739"
+        },
+        {
+          "name": "_normalize_side_to_code",
+          "start_line": 510,
+          "end_line": 520,
+          "sha256": "5d1d8b99bfee9768169f884e7f739bd41e7c16189f434a882a7e06ccb6225bff"
+        },
+        {
+          "name": "_binary_entropy",
+          "start_line": 522,
+          "end_line": 524,
+          "sha256": "8597897d4921f1275e9cef9f03ac1fd95874f6b7f6cee47b5d1400bcc6401af2"
+        },
+        {
+          "name": "rolling_entropy_from_counts",
+          "start_line": 526,
+          "end_line": 547,
+          "sha256": "334e0cba024083c79eba6b9272216b1897392b01964bfe5cc7386a120d29df7a"
+        },
+        {
+          "name": "rolling_sum",
+          "start_line": 549,
+          "end_line": 554,
+          "sha256": "6235e99d45c33334c2f1af5ee0bc42a8a8067e9f7f28ecd4e27fc0c4a096f1ec"
+        },
+        {
+          "name": "rolling_mean",
+          "start_line": 556,
+          "end_line": 557,
+          "sha256": "450804d553d1c5e5e508f9c531704960af5f961c5a2e829bf12549d55bacd28f"
+        },
+        {
+          "name": "rolling_std",
+          "start_line": 559,
+          "end_line": 571,
+          "sha256": "19d7677847c620fcd6145a1310cbdf96b5964f09d9363795dc3a7f99130830a5"
+        },
+        {
+          "name": "rolling_z",
+          "start_line": 573,
+          "end_line": 576,
+          "sha256": "32060fe1535135acd048671034a6c04657983e302e599d96939d08c6edb36529"
+        },
+        {
+          "name": "rolling_linreg_slope_r2",
+          "start_line": 578,
+          "end_line": 607,
+          "sha256": "70beb1a723f93f52493b3f6f0be2c4b2e9abab3b67e4be3400dca7a209475f68"
+        },
+        {
+          "name": "transformer_feature_cols",
+          "start_line": 609,
+          "end_line": 665,
+          "sha256": "a92b71903d58efd7144f61ccad47f89a4b5add2bf4496241e278f0f5c07337ba"
+        },
+        {
+          "name": "trades_records_to_dataframe",
+          "start_line": 806,
+          "end_line": 826,
+          "sha256": "999b0672b4728a3b110bbb01e5bfbada5590e3e118dc50ca6fba27664c82cfde"
+        },
+        {
+          "name": "aggregate_trades_1s",
+          "start_line": 833,
+          "end_line": 932,
+          "sha256": "ce8235f1233ab0786cda2f49d1d7d50ab80762957f3a436bd8d19415ec02fa30"
+        },
+        {
+          "name": "build_features_1s",
+          "start_line": 939,
+          "end_line": 1081,
+          "sha256": "af9f72e05370771e09955d6c4b3b1693164bcc89583f58c4bd16ba0c58c3beae"
+        },
+        {
+          "name": "ema",
+          "start_line": 1228,
+          "end_line": 1246,
+          "sha256": "1ffc388b99d87ae70d61fdcf08cdaf23b0196e653abde7037f5fb8848fa7ce30"
+        }
+      ],
+      "candidate_deviation": "2026-11-18: stable timestamp ordering at conversion and aggregation; reject cadence_s != 1 to prevent silent input loss; feature formulas unchanged"
+    },
+    {
+      "source": "train_sac_longonly_notional_trend_v4.py",
+      "target": "src/streaming_research/policy/sac.py",
+      "operation": "AST dependency closure; import paths only",
+      "source_sha256": "34ca612714ff573a34d07368826a1f1cde288db6d8358db8212fe7cc2a051408",
+      "segments": [
+        {
+          "name": "SimBaBlock",
+          "start_line": 98,
+          "end_line": 109,
+          "sha256": "cf82ea6a4625dd165e7294545a792fbddf8966e35dd036060964084d2f07051b"
+        },
+        {
+          "name": "SimBaMLP",
+          "start_line": 112,
+          "end_line": 125,
+          "sha256": "50301a7b5d7efb76e7c4692355334056a72839e40f64e585eb91568d284a96b8"
+        },
+        {
+          "name": "SimBaStateEncoder",
+          "start_line": 128,
+          "end_line": 135,
+          "sha256": "ee250dd92e517eb9f21c42847f85ce2ce4518ef4db79d58637b9d52605c114c1"
+        },
+        {
+          "name": "SimBaActionEncoder",
+          "start_line": 138,
+          "end_line": 145,
+          "sha256": "97f5d1b408ace9230ba980d14daa94f36b44d44df2a363e6e30581a4a695d22c"
+        },
+        {
+          "name": "QNetInteraction",
+          "start_line": 148,
+          "end_line": 179,
+          "sha256": "dd60dfd3e43fdfea36a74566d2930cb112ae5750f0d5947948400908edc5af15"
+        },
+        {
+          "name": "BetaSignedPolicy",
+          "start_line": 186,
+          "end_line": 266,
+          "sha256": "9cc8089fc257f06606189ce6de5e6c874b7a301d4f1105b57c1d522c94a65d9b"
+        },
+        {
+          "name": "EmbReducer",
+          "start_line": 269,
+          "end_line": 279,
+          "sha256": "09acb7cf8adb7c2866574a8bc5572a1c645c935bb5a3319b95c56e3606940362"
+        },
+        {
+          "name": "ARCHITECTURE_VERSION",
+          "start_line": 286,
+          "end_line": 286,
+          "sha256": "c01a1a0369074fb757ea904f4a104293f6c8a27948d2bd56f7a07e36b985e486"
+        },
+        {
+          "name": "NETWORK_PRESETS",
+          "start_line": 287,
+          "end_line": 287,
+          "sha256": "8fdcaa08f5bbf00d6a649fe6abce96ec603ac05db39c494f297099229106b0ac"
+        },
+        {
+          "name": "NetworkArchCfg",
+          "start_line": 290,
+          "end_line": 303,
+          "sha256": "825960055a62f941132bae24e3085709069c5856e84ff418b4ad60478219f8fe"
+        },
+        {
+          "name": "_validate_simba_dims",
+          "start_line": 315,
+          "end_line": 324,
+          "sha256": "7400087854c5cd69fb2d02b7ba6451a6a32291fcab7d60e80e08935f3b4a375e"
+        },
+        {
+          "name": "_hidden_depth_from_dims",
+          "start_line": 327,
+          "end_line": 329,
+          "sha256": "f61c82a47ff1bc920d42503a2d28d2ba7540bd534fb856f549c9710e6c2ff4c6"
+        },
+        {
+          "name": "network_arch_preset",
+          "start_line": 332,
+          "end_line": 346,
+          "sha256": "dfac31f354cca8edb1b6fa4e835e343161825c5b368df911c0f4a806642d38b8"
+        },
+        {
+          "name": "ReplayBuffer",
+          "start_line": 2169,
+          "end_line": 2306,
+          "sha256": "a51615c92fd4997b747f262e5cfd2a672ac5e53fcc003301e2d72fcea8869032"
+        },
+        {
+          "name": "NStepAdder",
+          "start_line": 2309,
+          "end_line": 2378,
+          "sha256": "77ce6b43fa9411d7b14fa480f2409c63ac729c07dd63ac64926a32e45a5f32d3"
+        },
+        {
+          "name": "SacCfg",
+          "start_line": 2384,
+          "end_line": 2408,
+          "sha256": "fdf06331ea61644d8315dbcc20195dfa9dd865f7ed6664f7c6149b7a5f81e836"
+        },
+        {
+          "name": "SAC",
+          "start_line": 2411,
+          "end_line": 2831,
+          "sha256": "e5256cf51fe9c8d203dedcb623130b9e164d87d832cde15ea1562a8af7f10771"
+        }
+      ]
+    },
+    {
+      "source": "backtest_sac_longonly_trend_v4.py",
+      "target": "src/streaming_research/policy/v4_environment.py",
+      "operation": "AST dependency closure; import paths only",
+      "source_sha256": "5463a88ba89bc265681dd201d491e9d1558e83d925ff8a705e9d3bf74f5894a1",
+      "segments": [
+        {
+          "name": "apply_signed_action_bias",
+          "start_line": 79,
+          "end_line": 80,
+          "sha256": "926e3873b01853456cede77e2395e5b0b4e1fd8a33edde3f221b47ea1b8f3727"
+        },
+        {
+          "name": "safe_div",
+          "start_line": 83,
+          "end_line": 84,
+          "sha256": "a33262ca3bedd78df174c7d8d15a07ae2be355884377ba0299aea466b989f5c0"
+        },
+        {
+          "name": "OBSERVATION_TIMING_MODES",
+          "start_line": 88,
+          "end_line": 88,
+          "sha256": "7e8624f59b982ad33684bbed07b034561ddbd2c0b1bdde38ca184ced2608691b"
+        },
+        {
+          "name": "TEMPORAL_SEMANTICS_LEGACY",
+          "start_line": 89,
+          "end_line": 89,
+          "sha256": "097b1114b03a0ca288b09422b21ef5ba8ce561c812d31983abf993b57eb80575"
+        },
+        {
+          "name": "fracdiff_weights",
+          "start_line": 592,
+          "end_line": 601,
+          "sha256": "816cb981770a8b0769befe1fa7b005d88178c2cf576e8a8114dee987ce74be49"
+        },
+        {
+          "name": "fracdiff_series",
+          "start_line": 604,
+          "end_line": 612,
+          "sha256": "5817d4ed9b2c49371fe61a387bc9d731538b35232d0cbba66f7c33379a4d5ecc"
+        },
+        {
+          "name": "qcol",
+          "start_line": 615,
+          "end_line": 617,
+          "sha256": "d6628b7df141c7d457044597f0495fd7ec0d992ffa9eb21120c8f3a86de263a4"
+        },
+        {
+          "name": "pick_state_cols",
+          "start_line": 620,
+          "end_line": 624,
+          "sha256": "a85b484b3ee0d068a63b2cac1e478bc7bf267479f043ca1c85f0f7bd280fcdb8"
+        },
+        {
+          "name": "pick_embedding_cols",
+          "start_line": 627,
+          "end_line": 632,
+          "sha256": "c58e8b07bcfc463657b7cfc28ea2c71d2b18efb10126f62a5f3218adecc4315f"
+        },
+        {
+          "name": "EpisodeCache",
+          "start_line": 635,
+          "end_line": 655,
+          "sha256": "a9ff4bc3b5722fe227e09d959df6d4cb69c3a6f30b58e4e43a23e2e6aadc1066"
+        },
+        {
+          "name": "EnvCfg",
+          "start_line": 662,
+          "end_line": 760,
+          "sha256": "bfa4f2feb1793dcde336faa62900f30f0043e971cdc993e986a8753dd957af76"
+        },
+        {
+          "name": "ParquetTradingEnv",
+          "start_line": 763,
+          "end_line": 2054,
+          "sha256": "794eb47ee7f70932010ad4e79dec0856b69e6d0198c7bd07651a848118cc9c90"
+        },
+        {
+          "name": "resolve_liquidation_cost_model",
+          "start_line": 2243,
+          "end_line": 2249,
+          "sha256": "24dc8c94cd6f7c3e19c449da196486105cbdcc8876f37a1945dc5416711c384c"
+        },
+        {
+          "name": "effective_trade_cost_per_share",
+          "start_line": 2252,
+          "end_line": 2260,
+          "sha256": "2261a2300189e58658c5c9bffaa7ddd34f7e0e48d1613ef780204e9028474d99"
+        },
+        {
+          "name": "effective_liquidation_cost_per_share",
+          "start_line": 2263,
+          "end_line": 2276,
+          "sha256": "3368efb61db4d18a0f283eb8ab6b7a5767416d032a02c59883164d624b9ef8f9"
+        },
+        {
+          "name": "compute_real_accounting_step",
+          "start_line": 2312,
+          "end_line": 2363,
+          "sha256": "fe335d274bdfc24d4b0feba73aeef9d7b6a3bfbacc4be4142e53ba8afd4a90d1"
+        }
+      ]
+    },
+    {
+      "source": "sac_execution_accounting_v4.py",
+      "target": "src/streaming_research/policy/accounting.py",
+      "operation": "verbatim copy",
+      "source_sha256": "0343b580e4c0cdd9aa3fe5d5d9668e744e3089df18d0efa8e80ec1ff00df42b6"
+    },
+    {
+      "source": "experimental/native_shadow/minimal/qualification_guard.py",
+      "target": "src/streaming_research/runtime/recovery.py",
+      "operation": "verbatim copy",
+      "source_sha256": "31138decebcde94605c31a8c4f0747993e20bd50525c2f28e64dbf1bc0fe080d"
+    },
+    {
+      "source": "live/replay_live_signedexec_v4.py",
+      "target": "src/streaming_research/runtime/transformer_runner.py",
+      "operation": "AST dependency closure; import paths only; checkpoint constructor replaced with validated in-memory model/metadata binding; inference methods retained",
+      "source_sha256": "d576c9aaa20f05cf290d7f2be47ad214534f1290565c39ea0982ee9935c46488",
+      "segments": [
+        {
+          "name": "LocalTransformerRunner",
+          "start_line": 1157,
+          "end_line": 1314,
+          "sha256": "6552c6aff85f54ceb3b879998475ba5be592fc537d74784f0b983326f0afbb8d"
+        }
+      ],
+      "candidate_deviation": "2026-11-18: reject nonfinite forecast/embedding before valid flags; original inference arithmetic retained"
+    },
+    {
+      "source": "live/transformer_fast_v4.py",
+      "target": "src/streaming_research/runtime/transformer_fast.py",
+      "operation": "AST dependency closure; import paths only; constructor forwards in-memory model/metadata instead of checkpoint paths",
+      "source_sha256": "b69f848b430e5220350853eefd30630e3ba1a733390b849a1e5f374b34329e90",
+      "segments": [
+        {
+          "name": "PreparedTransformerInputWindow",
+          "start_line": 22,
+          "end_line": 41,
+          "sha256": "ddda18d7d39f22dee96ba613465cefa04695dfb1e77884b5a141154f5cdccbb7"
+        },
+        {
+          "name": "RollingTransformerInputState",
+          "start_line": 44,
+          "end_line": 170,
+          "sha256": "9dca94212e67d82261dabe311f923e1c214159852b63db79d3a81b6e0822e8cc"
+        },
+        {
+          "name": "FastLocalTransformerRunner",
+          "start_line": 173,
+          "end_line": 407,
+          "sha256": "d52bf7ba6873f38d023cc81ff27bd9032fbdc8d1459fe4a80564352d5e24e072"
+        }
+      ],
+      "candidate_deviation": "2026-11-18: omit unused append_row_profiled/copy_into_profiled duplicates; inherited shared nonfinite-output guard; docstring qualifies equivalence"
+    },
+    {
+      "source": "experimental/agent_c_native_inference/early_input_publication.hpp",
+      "target": "native/include/early_input_publication.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "110be5de732fca4b103360d89ef47871f82935c2de29b9831a70d38b23d6b626"
+    },
+    {
+      "source": "experimental/agent_c_native_inference/frozen_model_abi.hpp",
+      "target": "native/include/frozen_model_abi.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "8e5fdb62348c41b3c9d20fa760d9911f96d43302a301db51a0778d49386f627b"
+    },
+    {
+      "source": "experimental/agent_c_native_inference/pinned_flat_pipeline.hpp",
+      "target": "native/include/pinned_flat_pipeline.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "b1238bfc215f3efd4e8e6cec42fe6b1c1820051739dae74251b2069362db6285"
+    },
+    {
+      "source": "experimental/native_shadow/include/attestation.hpp",
+      "target": "native/include/attestation.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "8609f3a276ac05fa40b4dd732b900355ec62d3e50affb4f30aa81989b4a4d233"
+    },
+    {
+      "source": "experimental/native_shadow/include/core.hpp",
+      "target": "native/include/core.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "c423a144de69e200daf9fa44101e69972295bb8c6b26d8d787619baede72d96e"
+    },
+    {
+      "source": "experimental/native_shadow/include/execution.hpp",
+      "target": "native/include/execution.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "dd5b79bf23172157686ca6f498ae7ab2f2668bf70d2fd55efeaa2e5ccf731fb9"
+    },
+    {
+      "source": "experimental/native_shadow/include/flat_history.hpp",
+      "target": "native/include/flat_history.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "06894be51722981a5704b3e101bf804f6331124de1f5c1a68091c4dfd34c2cce"
+    },
+    {
+      "source": "experimental/native_shadow/include/inference_interface.hpp",
+      "target": "native/include/inference_interface.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "1429d1045b7f6de2d40608a174d34f838c894e30f8fc0623c72d99cfa8068730"
+    },
+    {
+      "source": "experimental/native_shadow/include/model_state.hpp",
+      "target": "native/include/model_state.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "87e6eb3f26290e72e7adb34b7d60d92b72fa4453b644fc806979342553a3e95a"
+    },
+    {
+      "source": "experimental/native_shadow/include/paper.hpp",
+      "target": "native/include/paper.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "5b751b0838ece56ce8e5615f66772231275d4ac450fcacb9a76423e5bc5ae845"
+    },
+    {
+      "source": "experimental/native_shadow/include/pure_engine.hpp",
+      "target": "native/include/pure_engine.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "4b0f41ffd8458d07f87373b5508ff292491ea159b2a9ae79e09b382bc43faeef"
+    },
+    {
+      "source": "experimental/native_shadow/include/source_state.hpp",
+      "target": "native/include/source_state.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "9dcd0b461b5c481b1bca925fe4d05cee5c11f9ffba4f66398e9ca470a28c2b48"
+    },
+    {
+      "source": "experimental/native_shadow/include/version_store.hpp",
+      "target": "native/include/version_store.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "7fa5599abc2f2f73b43ffcc78d102dc2ec59e0a54e93a8e2bda7253be53fba36"
+    },
+    {
+      "source": "experimental/native_shadow/integrated/protocol.hpp",
+      "target": "native/include/protocol.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "2233579cf26441cc54fd5b0ce18dd019c588b6afdf2e8b4bb2523e30f1ce25b5"
+    },
+    {
+      "source": "experimental/native_shadow/minimal/context_microbatch.hpp",
+      "target": "native/include/context_microbatch.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "909e9fd70a0fa38dc84a862e7e2f713c8dab14d422788ebcfac1ea7f8cf42793",
+      "candidate_deviation": "2026-11-18: explicit include of extracted slot_limits.hpp; scheduler math/state unchanged"
+    },
+    {
+      "source": "experimental/native_shadow/minimal/eligibility.hpp",
+      "target": "native/include/eligibility.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "25d12841d297e24c10c58948e7d6b1c135b666506ceec07c55f805a1db91f0e2"
+    },
+    {
+      "source": "experimental/native_shadow/minimal/portfolio_capture.hpp",
+      "target": "native/include/portfolio_capture.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "147577fb2ad3e46629aa21ccb699ca3cf7d20231eec8657ab1275f1fb44e3189",
+      "candidate_deviation": "2026-11-18: omit unused seal/file-export method and related includes; retain bounded in-memory capture"
+    },
+    {
+      "source": "experimental/native_shadow/minimal/queue_controls.cpp",
+      "target": "native/tests/queue_controls.cpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "bebeb0f42587388347735c9f2c3d75d96ce0901ccf9dfc7c81dfdb38ee86ca47"
+    },
+    {
+      "source": "experimental/native_shadow/src/attestation.cpp",
+      "target": "native/src/attestation.cpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "bc732b5ad620312dc60fceabac933f8209c028113aa8fdd888bff0783333e782"
+    },
+    {
+      "source": "experimental/native_shadow/src/numeric.cpp",
+      "target": "native/src/numeric.cpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "f328f1d7c24c609205366ffaf810d1c364a9acce2ee17128b61b09d57c3ee9c2"
+    },
+    {
+      "source": "experimental/native_shadow/stage1/callback_counters.hpp",
+      "target": "native/include/callback_counters.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "b0ddbeef5d6c1ba33d645fd00181f77e66ba3832fe926c7265c9cdc84c0aed1e"
+    },
+    {
+      "source": "experimental/native_shadow/stage1/callback_diagnostics.hpp",
+      "target": "native/include/callback_diagnostics.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "138b0112696b027d306fed08ecf52ca8e25aa5daddcfd9bdcca5bd29e1adb958"
+    },
+    {
+      "source": "experimental/native_shadow/stage1/large_queue.hpp",
+      "target": "native/include/large_queue.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "dffce3518e87d41c51377259dd8646bf15e5b7ed4873a794c0776c022683ef4f"
+    },
+    {
+      "source": "experimental/native_shadow/stage1/smallcap_scanner.hpp",
+      "target": "native/include/slot_limits.hpp",
+      "operation": "extract original SmallCapSlots=100 bound only; omit scanner implementation and private admission thresholds",
+      "source_sha256": "7ddcd4796afb2abe2360fec90601befe01b553c39f138b78a7631a6fea3eda55",
+      "candidate_deviation": "std::size_t qualifies the retained constant type; accurate standalone include name"
+    },
+    {
+      "source": "experimental/native_shadow/stage1/source.hpp",
+      "target": "native/include/source.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "0e7df02444c571c62bd446ce4b1dfe6d97f8b4c1d4fba6f1a6814a65b5cdeeb5"
+    },
+    {
+      "source": "experimental/native_shadow/tests/allocation_counter.hpp",
+      "target": "native/include/allocation_counter.hpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "82804a79c93d5cd25f83ff4d9f881b9edf5c6b1679bf97292485c0d07817c826"
+    },
+    {
+      "source": "experimental/native_shadow/tests/allocation_test.cpp",
+      "target": "native/tests/allocation_test.cpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "1ff7504b76bdbecc802eff0b72a881ca7b25a35a8b2f0ad7b5f9743e9070a4ba"
+    },
+    {
+      "source": "experimental/native_shadow/tests/core_test.cpp",
+      "target": "native/tests/core_test.cpp",
+      "operation": "include paths flattened only; algorithm bodies unchanged",
+      "source_sha256": "f76647c221865b73a8930b36962771876abe179d0923a4f01ff0ff3be2dbf607"
+    },
+    {
+      "source": "experimental/native_shadow/minimal/service_tests.cpp",
+      "target": "native/tests/context_microbatch_test.cpp",
+      "operation": "only original synthetic test_context_microbatch; preserve calendar fixture epoch; standalone main",
+      "source_sha256": "1dc0450a5b0504245ae7c9256cd8628071ffeecd4a1ce90e29217b59b33952c1"
+    },
+    {
+      "source": "tests/test_sac_execution_accounting_v4.py",
+      "target": "tests/test_accounting.py",
+      "operation": "test logic unchanged; import paths only",
+      "source_sha256": "9586c8947bbb3e50662bcb0a240ff53ff154f5247cd463f77523ac671536692a"
+    },
+    {
+      "source": "experimental/native_shadow/minimal/test_qualification_guard.py",
+      "target": "tests/test_recovery.py",
+      "operation": "test logic unchanged; import paths only; logger expectation follows relocated module name",
+      "source_sha256": "884b9f7456a78a851a8d8e5589b7e2e35a3024f9d5efc42cd900e8d78a62d0d0"
+    }
+  ],
+  "candidate_changes_20261118": "Original whole-source hashes and extraction segment hashes remain provenance of the private source, not a claim of candidate byte/AST equality after documented fixes/deletions. Candidate hashes are in PUBLICATION_MANIFEST.csv."
+}
