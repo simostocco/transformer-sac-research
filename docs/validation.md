@@ -9,3 +9,7 @@ The native suites cover core/history behavior, bounded allocation, queue control
 The random-weight example consumes 240 synthetic bars and produces finite outputs. A tiny in-memory SAC update tests the code path; it is not a training experiment or evaluation of a policy's economic performance. Three inherited Torch SDPA deprecation warnings remain, with the original attention selection untouched to avoid an unqualified numerical backend change.
 
 Private historical deployment, source/binary/model pins and decision timing were reviewed separately. Those receipts and figures are not public candidate results and are excluded pending disclosure rights. Full learned-model/CUDA/market-data reproduction is outside the public synthetic contract.
+
+## Interpretation of passing controls
+
+The recorded 72 tests and 45 subtests remain valid evidence for their specific assertions; this documentation update does not change source or tests. A separate uniform-Beta density check exposed the [signed-Beta Jacobian-sign issue](numerical_contract.md#signed-beta-log-density-known-issue), which the existing suite does not cover. A finite SAC update does not establish a correct entropy term, trained-policy quality or a complete numerical audit.

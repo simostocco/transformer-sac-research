@@ -13,3 +13,15 @@ The return-delta local bias loops over its configured K; sequence lengths below 
 Private historical controls demonstrate incomplete learned-model equivalence. Real-data goldens, quantitative deployment/parity results and fitted artifacts are not part of this source-only tree.
 
 Native canonical scheduling and temporal owner fields must retain their original contracts. The original V4 environment's `legacy_same_row` and `previous_completed_bar` modes are distinct, and pending targets act on eligible real-trade bars. Do not infer exchange-to-order latency, true trade fills or stateful portfolio behavior from flat-owner diagnostic outputs.
+
+## Signed-Beta log-density: known issue
+
+`BetaSignedPolicy.sample` draws `u` from a Beta distribution and returns `z = 2u - 1`. For the density of `z`, the change of variables is
+
+$$\log p_Z(z)=\log p_U((z+1)/2)+\log(1/2).$$
+
+The published implementation sets `log_abs_det_jac = log(0.5)` but **subtracts** it from the Beta log-density. That returns a value `2 log(2)` above the transformed density. For the uniform case `Beta(1,1)`, the correct density on `(-1,1)` is `1/2`: log-density `-log(2)`. The implementation returns `+log(2)`.
+
+SAC uses this returned value in its soft Q-target and automatic temperature update. The returned density is therefore not the correctly normalized signed-latent density; practical learned-policy effects have not been measured. Inventory-dependent action mapping is a further distinct transformation, and no executed-action entropy correctness claim is made here.
+
+The existing action-mapping/tiny-update test establishes finite execution and its stated mapping cases, not this density identity. A focused read-only CPU check of the uniform case reproduced the discrepancy. This documentation PR preserves the published algorithm and tests; a numerical fix, regression test and any policy requalification belong in a separate code change. Do not describe the current entropy calculation as an exact change-of-variables implementation.

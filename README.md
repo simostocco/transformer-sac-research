@@ -1,41 +1,96 @@
-# Transformer–SAC: causal models and streaming inference
+# Transformer–SAC: learning, numerics and streaming inference
 
-Research on connecting a causal quantile Transformer to an inventory-aware Soft Actor-Critic policy, with explicit numerical, temporal and resource contracts for streaming inference.
+This project originated in intraday financial-market research: learning from trade streams to forecast short-horizon price excursions and study inventory-aware decisions with reinforcement learning. Developing the pipeline turned the application into a scientific computing problem involving causal forecasting, numerical consistency and real-time inference.
 
-This selected research core contains the project's Python models and simulation, plus C++ state, queue and microbatch scheduling components. It runs synthetic CPU checks without a feed account, market-data download or trained weights. The operational trading system and its Git history remain private. This candidate has no live launcher, vendor SDK, broker connection or order-submission path.
+The research question is how to preserve the meaning of observations, model outputs and state across a forecast-to-policy pipeline, while inference work competes for finite time and memory.
 
-## Research question
+## Research motivation
 
-How can a forecast-to-policy interface preserve causal inputs, consistent accounting and bounded inference work when symbols have uneven activity and different history lengths? The project treats predictive quality, simulated economic outcomes and serving correctness as separate questions. This repository supports inspection and synthetic validation of the design; it does not establish investment returns or learned-model generalization.
+A forecast must use only observations available at its input time. A policy's requested action must be interpreted against current inventory and pending orders, while a delayed result may no longer describe the current state. Floating-point precision, reduction order and data layout can introduce further differences between implementations.
+
+This project makes those contracts explicit:
+
+- **Temporal modeling:** construct causal features and multi-horizon quantile targets, then preserve feature/target identity through inference.
+- **Sequential decisions:** distinguish a policy's signed latent, its inventory-constrained action and the simulator's actual fills and equity.
+- **Numerical and systems validation:** compare qualified computations, enforce bounded ownership and work queues, and reject stale or nonfinite results.
+
+## Project contributions
+
+| Area | Implemented work |
+|---|---|
+| Python research and model design | Causal aggregation/features; a configurable RoPE quantile Transformer with regime, relative-position and return-delta inputs; forecast-to-policy interfaces. |
+| Policy and simulation | Signed-Beta SAC research stack, explicit state/action interaction features, replay/update code and the original V4 pending-order/cash/inventory accounting. |
+| Numerical methods | Streaming feature recurrences, explicit precision/reduction choices and synthetic Python/native comparison controls. |
+| Native streaming integration | Bounded source queues, immutable histories, context reuse, source identity and deadline-aware microbatch scheduling, with a synthetic mock worker. |
+
+The contribution is the project's custom design, Python development, integration and validation of these components. SAC, RoPE and SimBa are established methods, credited below. Native C++ implementation and debugging were AI-assisted under the owner's design direction; neural-network CUDA execution uses PyTorch. See [contributions and attribution](docs/contributions.md).
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    A[Synthetic trades / user-owned records] --> B[Causal one-second bars and features]
-    B --> C[Frozen preprocessing metadata]
-    C --> D[Quantile Transformer]
-    D --> E[Quantiles and pooled representation]
-    E --> F[Signed-Beta SAC policy]
-    F --> G[Offline V4 simulation and accounting]
-    H[C++ bounded source state] --> I[Immutable history and context cache]
-    I --> J[Deadline-aware microbatch scheduler]
-    J -. interface; private serving adapter excluded .-> D
+    subgraph P[Python research components]
+        T[Trades] --> F[Causal bars and features]
+        F --> X[Frozen scaling and regime labels]
+        X --> Q[Quantile Transformer]
+        Q --> O[Forecast and pooled representation]
+        O --> S[State construction and signed-Beta SAC]
+        S --> V[V4 simulation and equity accounting]
+    end
+    subgraph N[Native streaming components]
+        E[Owned source events] --> H[Immutable histories]
+        H --> C[Context cache and microbatch scheduler]
+        C --> M[Mock worker in public tests]
+        M --> D[Identity, age and deadline checks]
+    end
+    C -. private serving adapter excluded .-> Q
 ```
 
-The custom Transformer implementation combines RoPE, causal attention, learned relative-position and local return-delta biases, regime embeddings, quantile heads and weighted pinball loss. The small CPU example exercises the same model class with random weights. Larger private research configurations and learned artifacts are not distributed.
+The diagram maps component interfaces. The public example exercises the Python feature/Transformer path; SAC and native scheduling have separate focused tests. The operational adapter that connects a licensed feed to trained CUDA models is outside this repository.
 
-The SAC implementation uses SimBa-style residual networks, interacting twin critics, entropy-temperature tuning and an inventory-dependent signed-Beta action mapping. Its original V4 environment separates horizon rewards from cash-plus-inventory equity and preserves pending-first real-bar execution semantics. These are research simulation rules, not observed broker fills.
+## Models and numerical methods
 
-The native code demonstrates bounded queues, immutable history ownership, context reuse, source-generation checks, completion handling and deadline gating. Neural-network execution in the private runtime uses Python/PyTorch CUDA. This repository does not claim custom CUDA kernels or a C++ neural-network implementation. The native mock worker tests scheduling without a GPU or model checkpoint.
+### Quantile Transformer
 
-## What was contributed
+[The implementation](src/streaming_research/forecasting/transformer.py) combines causal RoPE attention, optional learned relative-position and local return-delta biases, and learned embeddings for two regime-label streams. Quantile heads predict configured future log-price excursion targets; inference also exposes a pooled hidden representation, with a mean-of-last-16 mode.
 
-The owner confirms responsibility for the Transformer/SAC research design and integration, Python research development, accounting/interface decisions, and the direction and validation of native C++/PyTorch CUDA integration. Native implementation and debugging were AI-assisted. SAC, RoPE and SimBa are established methods and are credited below; the contribution is the custom design, integration and evidence-driven engineering. See [contributions](docs/contributions.md).
+Training utilities retain weighted pinball loss,
 
-## Run the research checks
+$$\rho_\tau(e)=\max\{\tau e,(\tau-1)e\},\qquad e=y-\hat q_\tau,$$
 
-Tested platform: Linux x86-64, CPython 3.11.18, CPU-only PyTorch 2.15.0, NumPy 2.2.6 and pandas 2.3.3. Install the exact hash-locked environment; no CUDA packages, data or models are needed:
+with sample weighting and optional target weighting. Target definitions, quantile order and frozen preprocessing metadata are part of the model interface. The small example instantiates this same model class with random weights. Optional CPC heads are present but disabled in the example; no trained forecasting accuracy is claimed here.
+
+### SAC and stateful simulation
+
+[The policy implementation](src/streaming_research/policy/sac.py) uses SimBa-style residual networks and twin Q-networks. Each critic combines separately encoded state/action features, their product and their difference. A Beta-distributed variable is mapped to a signed latent; positive values scale remaining buy capacity and negative values scale current inventory. Zero latent requests no trade.
+
+Replay structures, multi-step returns, target-network updates and automatic temperature tuning are retained. A **known Jacobian-sign issue in the signed-Beta log-density** limits interpretation of the entropy term; [the numerical contract](docs/numerical_contract.md#signed-beta-log-density-known-issue) gives the exact discrepancy. The published algorithms are preserved in this documentation revision.
+
+The [V4 environment](src/streaming_research/policy/v4_environment.py) and [accounting functions](src/streaming_research/policy/accounting.py) distinguish requested actions, pending orders, fills, costs and cash-plus-marked-inventory equity. Overlapping reward-horizon sums are a different quantity from equity P&L.
+
+### Native numerical and streaming components
+
+The C++ feature path uses float64 recurrence state and float32 model inputs. Reduction order, explicit FMA, frozen transforms, compiler flags and the selected BLAS runtime are treated as reproducibility choices. The NumPy-derived log/reduction design retains its BSD attribution; the native log probe is checked on 4,096 synthetic values at absolute tolerance `2e-6`.
+
+Source ownership, immutable history, context-cache identity, bounded queues and deadline gating are explicit in the native headers. These components are tested with generated events and a mock worker. This is C++ numerical/state/scheduling infrastructure around a model interface, not C++ neural-network execution or custom CUDA kernels. [Architecture](docs/architecture.md) and [numerical contract](docs/numerical_contract.md) describe the boundaries.
+
+## Validation evidence
+
+The recorded Linux/CPython 3.11 CPU profile passed:
+
+| Control | Recorded evidence |
+|---|---|
+| Python tests | **72 tests + 45 subtests**: causality, accounting, recovery, model binding, action mapping, inference agreement and regression controls. |
+| Native suites | **4/4**: core/history, bounded allocation, queue behavior and context scheduling/drain. |
+| Numerical comparison | 4,096 synthetic positive inputs; native log versus NumPy within `2e-6` absolute tolerance. |
+| Synthetic example | 240 generated bars; 37 finite output fields from a small random-weight model. |
+| Environment | Hash-locked CPU wheels, installed-package checks and dependency consistency; no model/data downloads in the checks. |
+
+These are component controls, not trained-model, throughput or profitability benchmarks. The controls do not certify probabilistic calibration. Three inherited Torch SDPA deprecation warnings remain. [Validation scope](docs/validation.md) and [machine-readable results](docs/validation_results.json) record what was exercised.
+
+## Reproduce the CPU checks
+
+Tested: Linux x86-64, CPython 3.11.18, PyTorch 2.15.0+cpu, NumPy 2.2.6 and pandas 2.3.3. From the repository root:
 
 ```bash
 python3.11 -m venv /tmp/transformer-sac-research
@@ -45,32 +100,31 @@ CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /tmp/transforme
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 /tmp/transformer-sac-research/bin/python examples/synthetic_cpu.py
 ```
 
-The retained algorithm/accounting controls and new regression tests cover causality, invalid model bindings, nonfinite output rejection, stable ordering of equal-timestamp trades, signed action mapping, recovery and numerical controls. Native tests additionally exercise allocation, queue, cache, deadline and drain invariants. Build the optional native numeric probe for the complete Python suite; without it one test is explicitly skipped. [Reproducibility](docs/reproducibility.md) documents commands, external OpenSSL/oneMKL requirements and exact scope; [validation results](docs/validation.md) distinguish synthetic checks from absent trained-model reproduction.
+Without the optional native probe, one Python test is explicitly skipped. Native builds need C++20, CMake, OpenSSL development files, oneMKL and local UNIX-socket permission. [Reproducibility instructions](docs/reproducibility.md) provide the native commands, dependency qualification and installed-wheel check details.
 
-## Repository map
+## Navigate the implementation
 
-```text
-src/streaming_research/
-  features/       causal aggregation, feature math and frozen scaling
-  forecasting/    custom Transformer, losses, target/output definitions
-  policy/         original SAC, V4 simulation and equity accounting
-  runtime/        recovery guard, in-memory model binding and buffered inference
-native/
-  include/        bounded state, queue, cache, scheduler and reference types
-  src/           numerical recurrence and admission integrity
-  tests/         synthetic invariants and mock-worker scheduling
-tests/           Python accounting, recovery, causality and regression controls
-examples/        synthetic inputs and random-weight CPU execution
-requirements/    audited CPU wheel hashes, including build tools
-docs/            architecture, numerical contract, validation and provenance
-```
+| Path | Responsibility |
+|---|---|
+| [`features/`](src/streaming_research/features/) | Causal aggregation, feature math and frozen scaling. |
+| [`forecasting/`](src/streaming_research/forecasting/) | Transformer, target/loss definitions and output pooling. |
+| [`policy/`](src/streaming_research/policy/) | SAC, V4 environment and execution/equity accounting. |
+| [`runtime/`](src/streaming_research/runtime/) | Recovery, validated in-memory model binding and buffered inference. |
+| [`native/`](native/) | Bounded state, queue/cache/scheduler, numerical kernels and synthetic tests. |
+| [`tests/`](tests/), [`examples/`](examples/) | Python controls and the synthetic CPU example. |
 
-Validated algorithms were retained rather than replaced with simplified models. Three candidate boundary fixes are documented: reject nonfinite output before valid flags, preserve input order for timestamp ties, and reject unsupported non-one-second aggregation. Unused profiling duplicates and scanner/file-export code were removed. [Source map](docs/source_map.json) records original hashes and explicit deviations. Small offline ledger/reference types remain as native dependency closure; no broker/PAPER service is included.
+[Source provenance](docs/source_map.json) records the original extraction and explicit boundary fixes; [the manifest](PUBLICATION_MANIFEST.csv) binds every included file.
 
-## Limits and release boundary
+## Scope and limitations
 
-This repository does not reproduce the private trained checkpoint, fitted preprocessing or licensed-feed CUDA session. Complete historical-to-native learned-model parity, untouched historical holdout provenance, profitable live trading, autonomous deployment and general capacity claims remain unestablished. Synthetic agreement does not prove arbitrary precision, batch-size, hardware or economic equivalence.
+The public repository contains research components and synthetic controls. It does not include a trained checkpoint, fitted transforms, training CLI or the private feed-to-CUDA runtime. Complete historical-to-native learned-model parity and immutable historical holdout provenance remain incomplete. Quantile calibration, learned-policy quality, live profitability, broker fills, autonomous deployment and general capacity are not established by these checks. The signed-Beta density issue requires a separate algorithm/test change before claiming a correct entropy formulation.
 
-The source-only candidate excludes recordings, prices, real feature tables, symbol-level results, private benchmark receipts, fitted assets, credentials and vendor headers/libraries. Verified private operational measurements remain separate in the ETH review package, pending any needed disclosure permissions. No market-data redistribution right is assumed. See [release boundary](docs/release_boundary.md), [limitations](docs/limitations.md), [license status](LICENSE_STATUS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+Licensed data, private quantitative results, recordings, vendor SDK payloads, fitted assets and credentials remain excluded. External native dependencies have their own security/license qualification; one tested profile does not validate arbitrary hardware, precision, batch sizes or later package versions. See [limitations](docs/limitations.md) and [release boundary](docs/release_boundary.md).
 
-References: [Soft Actor-Critic](https://arxiv.org/abs/1801.01290), [RoFormer/RoPE](https://arxiv.org/abs/2104.09864), [SimBa](https://arxiv.org/abs/2410.09754).
+## License and references
+
+Project-owned source is published under [MIT](LICENSE). The [NumPy BSD notice](licenses/NUMPY-BSD-3-Clause.txt) and [third-party notices](THIRD_PARTY_NOTICES.md) retain the separate attribution and dependency boundaries.
+
+- [Soft Actor-Critic](https://arxiv.org/abs/1801.01290)
+- [RoFormer / rotary position embeddings](https://arxiv.org/abs/2104.09864)
+- [SimBa](https://arxiv.org/abs/2410.09754)
