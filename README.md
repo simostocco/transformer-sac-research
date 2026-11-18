@@ -64,7 +64,7 @@ with sample weighting and optional target weighting. Target definitions, quantil
 
 [The policy implementation](src/streaming_research/policy/sac.py) uses SimBa-style residual networks and twin Q-networks. Each critic combines separately encoded state/action features, their product and their difference. A Beta-distributed variable is mapped to a signed latent; positive values scale remaining buy capacity and negative values scale current inventory. Zero latent requests no trade.
 
-Replay structures, multi-step returns, target-network updates and automatic temperature tuning are retained. A **known Jacobian-sign issue in the signed-Beta log-density** limits interpretation of the entropy term; [the numerical contract](docs/numerical_contract.md#signed-beta-log-density-known-issue) gives the exact discrepancy. The published algorithms are preserved in this documentation revision.
+Replay structures, multi-step returns, target-network updates and automatic temperature tuning are retained. The historical entropy formulation has numerical limitations documented in the [signed-Beta log-density analysis](docs/numerical_contract.md#signed-beta-log-density-known-issue).
 
 The [V4 environment](src/streaming_research/policy/v4_environment.py) and [accounting functions](src/streaming_research/policy/accounting.py) distinguish requested actions, pending orders, fills, costs and cash-plus-marked-inventory equity. Overlapping reward-horizon sums are a different quantity from equity P&L.
 
@@ -117,7 +117,7 @@ Without the optional native probe, one Python test is explicitly skipped. Native
 
 ## Scope and limitations
 
-The public repository contains research components and synthetic controls. It does not include a trained checkpoint, fitted transforms, training CLI or the private feed-to-CUDA runtime. Complete historical-to-native learned-model parity and immutable historical holdout provenance remain incomplete. Quantile calibration, learned-policy quality, live profitability, broker fills, autonomous deployment and general capacity are not established by these checks. The signed-Beta density issue requires a separate algorithm/test change before claiming a correct entropy formulation.
+The public repository contains research components and synthetic controls. It does not include a trained checkpoint, fitted transforms, training CLI or the private feed-to-CUDA runtime. Complete historical-to-native learned-model parity and immutable historical holdout provenance remain incomplete. Quantile calibration, learned-policy quality, live profitability, broker fills, autonomous deployment and general capacity are not established by these checks.
 
 Licensed data, private quantitative results, recordings, vendor SDK payloads, fitted assets and credentials remain excluded. External native dependencies have their own security/license qualification; one tested profile does not validate arbitrary hardware, precision, batch sizes or later package versions. See [limitations](docs/limitations.md) and [release boundary](docs/release_boundary.md).
 
