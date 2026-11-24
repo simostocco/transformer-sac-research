@@ -23,7 +23,7 @@ This project makes those contracts explicit:
 | Numerical methods | Streaming feature recurrences, explicit precision/reduction choices and synthetic Python/native comparison controls. |
 | Native streaming integration | Bounded source queues, immutable histories, context reuse, source identity and deadline-aware microbatch scheduling, with a synthetic mock worker. |
 
-The contribution is the project's custom design, Python development, integration and validation of these components. SAC, RoPE and SimBa are established methods, credited below. Native C++ implementation and debugging were AI-assisted under the owner's design direction; neural-network CUDA execution uses PyTorch. See [contributions and attribution](docs/contributions.md).
+The contribution is the project's custom design, Python development, integration and validation of these components. SAC, RoPE and SimBa are established methods, credited below. Neural-network CUDA execution uses PyTorch.
 
 ## Architecture
 
@@ -119,7 +119,7 @@ Without the optional native probe, one Python test is explicitly skipped. Native
 
 The public repository contains research components and synthetic controls. It does not include a trained checkpoint, fitted transforms, training CLI or the private feed-to-CUDA runtime. Complete historical-to-native learned-model parity and immutable historical holdout provenance remain incomplete. Quantile calibration, learned-policy quality, live profitability, broker fills, autonomous deployment and general capacity are not established by these checks.
 
-Licensed data, private quantitative results, recordings, vendor SDK payloads, fitted assets and credentials remain excluded. External native dependencies have their own security/license qualification; one tested profile does not validate arbitrary hardware, precision, batch sizes or later package versions. See [limitations](docs/limitations.md) and [release boundary](docs/release_boundary.md).
+Licensed data, private quantitative results, recordings, vendor SDK payloads, fitted assets and credentials remain excluded. External native dependencies have their own security/license qualification; one tested profile does not validate arbitrary hardware, precision, batch sizes or later package versions. See the [release boundary](docs/release_boundary.md).
 
 ## License and references
 

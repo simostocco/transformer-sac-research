@@ -16,4 +16,4 @@ The requirements lock references external wheels; no wheel or dependency source 
 
 [Intel's oneMKL FAQ](https://www.intel.com/content/www/us/en/developer/articles/tool/onemkl-license-faq.html) points to the actual component license. No SDK, data, trained weights or native dependency binaries are distributed. Installed wheel/native distribution terms must be followed if anyone later bundles binaries; this source-only review is not that redistribution clearance.
 
-Established methods are credited: [SAC](https://arxiv.org/abs/1801.01290), [RoPE](https://arxiv.org/abs/2104.09864), [SimBa](https://arxiv.org/abs/2410.09754). The owner's design/integration and AI-assisted native implementation are described in docs/contributions.md.
+Established methods are credited: [SAC](https://arxiv.org/abs/1801.01290), [RoPE](https://arxiv.org/abs/2104.09864), [SimBa](https://arxiv.org/abs/2410.09754).
